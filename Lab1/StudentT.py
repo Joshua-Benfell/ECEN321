@@ -17,38 +17,40 @@ v = M - 1
 
 nums = sigma * np.random.randn(M, N) + mean
 
+sampleStdDev = np.std(nums)
 # print(nums)
 t_values = []
 
 for i in range(N):
     col = getColumn(i)
     sample_mean = np.mean(col)
-    sample_stddev = np.std(col)
-    t = ((mean - sample_mean) / sample_stddev) * np.sqrt(M)
-    t_values += [t]
+    t_values.append(((sample_mean - mean) / sampleStdDev) * np.sqrt(M))
 
 # print(t_values)
 
 # plt.hist(t_values, bins=80, range = (-10, 10))
 plt.figure(1)
-H, X = np.histogram(t_values, bins=40, range=(-10,10))
+plt.subplot(1,2,1)
+H, X = np.histogram(t_values, bins=80, range=(-10,10))
 dx = X[1]-X[0]
-plotVals = H / N
-plotVals = plotVals / dx
-plt.bar(X[:-1],plotVals,width=dx, color="blue", alpha=0.5)
+plotVals = H / (N * dx)
+plt.bar(X[1:],plotVals,width=dx, color="blue", alpha=0.5, label="PMF")
 
-tpdf = gamma((v+1)/2) / (np.sqrt(v*np.pi) * gamma(v/2) * np.power(1+(np.power((X+dx/2), 2)/v), (v+1)/2))  # +dx/2 just moves over the center x values
-plt.plot(X, tpdf)
+# tpdf = gamma((v+1)/2) / (np.sqrt(v*np.pi) * gamma(v/2) * np.power(1+(np.power((X+dx/2), 2)/v), (v+1)/2))  # +dx/2 just moves over the center x values
+# plt.plot(X, tpdf)
 
-# plt.figure(2)
+tpdf2 = stats.t.pdf(X-dx/2, v);
+plt.plot(X, tpdf2, label="Theoretical PDF")
+plt.legend(loc="upper right")
 
-tcdf = stats.t.cdf(X, N-1)
-plt.plot(X,tcdf)
-# plt.figure(2)
-# tcdf = np.cumsum(H/N)
-# plt.plot(X[1:],tcdf)
+plt.subplot(1,2,2)
+# Theoretical CDF
+tcdf = stats.t.cdf(X, v)
+plt.plot(X,tcdf, label="Theoretical CDF")
 
-# tcdf = np.cumsum(tpdf*dx)
-# plt.plot(X,tcdf)
+tcdf = np.cumsum(H/N)
+plt.plot(X[1:],tcdf, label="Experimental CDF")
+
+plt.legend(loc="upper right")
 
 plt.show()
