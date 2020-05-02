@@ -15,3 +15,12 @@ normalised_signal = sum(signals) ./ M;
 
 normalised_sample_mean = mean(normalised_signal)
 normalised_sample_std = std(normalised_signal)
+
+figure(1)
+plot(signals(1,:))
+hold on
+plot(normalised_signal)
+xlabel("Time (s)")
+ylabel("Voltage (V)")
+title("Signal Averaging")
+legend("Signal", "Averaged Signal")

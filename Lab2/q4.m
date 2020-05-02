@@ -16,4 +16,14 @@ edges = linspace(0.55, 0.65, boundary / dx);
 
 [histVals, bins] = hist(V_3, edges);
 figure(1)
-bar(edges, histVals/N);
+plot(edges, histVals/N);
+sum(histVals/N)
+title("PDF of V_2 - V_1")
+xlabel("Voltage (V)")
+ylabel("Probability Density")
+
+std(V_1)
+std(V_2)
+
+mean(V_3)
+std(V_3)*1000

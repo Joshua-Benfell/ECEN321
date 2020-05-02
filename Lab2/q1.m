@@ -13,3 +13,12 @@ sample_stddev = std(signal)
 amplified_signal = A_V .* signal; %Pass the signal through an amplifier
 amplified_sample_mean = mean(amplified_signal)
 amplified_sample_stddev = std(amplified_signal)
+
+figure(1)
+plot(signal)
+hold on
+plot(amplified_signal)
+xlabel("Time (s)")
+ylabel("Voltage (V)")
+title("Voltage Amplifier")
+legend("Signal", "Amplified Signal")
