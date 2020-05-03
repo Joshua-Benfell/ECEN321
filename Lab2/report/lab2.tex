@@ -153,7 +153,9 @@ showstringspaces=false            %
     \section{Conclusion}
         The main take aways from this report are that, repeated measurements reduce the standard deviation by a facter of $\sqrt{N}$, increasing precision. This is important as any constant that multiplies a measurement with some uncertainty also multiplies the uncertainty, making it larger.
         \par
-        The addition of noise to a signal can make that signal much less distinguishable in shape from what it is. This only happens if the size of the noise is a significant percentage (including higher) than the amplitude of the wave as instead of following the signals shape it extends far past it.
+        The addition of noise to a signal can make that signal much less distinguishable in shape from what it is. This only happens if the size of the noise is a significant percentage (including higher) than the amplitude of the wave as instead of following the signals shape it extends far past it. This happens to the point where it can be moderately correlated to an expected shape or totally uncorrelated which means we lose a lot of information about the signal or measurements.
+        \par
+        Finally, when multiple measurements which have uncertainties are subtracted, then the value and the uncertainty are done individually. The values have the specified operation done on them, and the uncertainties are added in the case of addition or subtraction. This means that you will increase the uncertainty whenever multiple measurements are operated on that all have uncertainties, so reducing them as much as possible in optimal. In addition to this the uniform distribution varies very slightly that it has no major effect on the end result as the overarching shape is still there. 
     % \Urlmuskip=0mu plus 1mu\relax
     \bibliography{bibliography}
     \bibliographystyle{IEEEtran}
