@@ -1,5 +1,6 @@
 \documentclass[a4paper, 12pt]{article}
 
+\usepackage{url}
 \usepackage{graphicx}
 \usepackage{caption}
 \usepackage[section]{placeins}
@@ -146,8 +147,19 @@ showstringspaces=false            %
                 \caption{PDF of $V_2 - V_1$}
                 \label{fig:v3}
             \end{figure}
+
+            \begin{figure}[!t]
+                \centering
+                \includegraphics[width=\textwidth]{sigDists.jpg}
+                \caption{PDF of $V_1$ and $V_2$}
+                \label{fig:sigDists}
+            \end{figure}
             
             The final application explores the effect of two signals with noise being measured after one is subtracted from the other. By using two uniformly distributed signals we can see in \cref{fig:v3} that we get a uniformly distributed signal as a result. This signal has mean $\mu = 0.5960$ and std dev $\sigma = 0.0058$, and these values are consistent over multiple simulations. The mean is exactly the answer to $2.53-1.934$ and the standard deviation is close to the mean of the uncertainties, although this is less significant as the uncertainty is not the standard deviation. The final standard deviation is equal to the standard deviation of $V_2$ as the standard deviation of $V_1$ is on the order of $10^{-4}$ which matlab removes through rounding so we don't see it's effect initially. Multiplying by 1000 reveals that it's $0.0058051$ which is the sum of the standard deviviations of both $V_1$ and $V_2$. 
+
+            \par 
+
+            Additionally, it should be noted that the edges of the distribution are tapered and the distribution is not wholly uniform (\cref{fig:v3}). This is a result of the nature of combining two distributions, being the convolution operator \cite{castrup_2020}.In \cref{fig:sigDists} we can see that $V_1$'s distribution is a lot thinner than the other, so as this convolves with it, it will cause the edge to include some 0's in the sum, resulting in less included values and thus a lower bar.
 
 
     \section{Conclusion}
@@ -155,7 +167,7 @@ showstringspaces=false            %
         \par
         The addition of noise to a signal can make that signal much less distinguishable in shape from what it is. This only happens if the size of the noise is a significant percentage (including higher) than the amplitude of the wave as instead of following the signals shape it extends far past it. This happens to the point where it can be moderately correlated to an expected shape or totally uncorrelated which means we lose a lot of information about the signal or measurements.
         \par
-        Finally, when multiple measurements which have uncertainties are subtracted, then the value and the uncertainty are done individually. The values have the specified operation done on them, and the uncertainties are added in the case of addition or subtraction. This means that you will increase the uncertainty whenever multiple measurements are operated on that all have uncertainties, so reducing them as much as possible in optimal. In addition to this the uniform distribution varies very slightly that it has no major effect on the end result as the overarching shape is still there. 
+        Finally, when multiple independent measurements are combined, the distributions are convolved to get the resulting distributions. The means are the regular operation of that you are using, in this case, the difference.
     % \Urlmuskip=0mu plus 1mu\relax
     \bibliography{bibliography}
     \bibliographystyle{IEEEtran}
