@@ -34,14 +34,17 @@ for I = 1:length(vals)
     E_K(c(1)) = sum(E_K(1:c(1)));
     E_K(c(end)) = sum(E_K(c(end):end));
     E_K = E_K(c(1):c(end));
-    plot(E_K/N);
+    plot(K(c(1):c(end)), E_K/N);
     %Observed K
     %no find in this one to keep dimensions consistent
     O_K(c(1)) = sum(O_K(1:c(1)));
     O_K(c(end)) = sum(O_K(c(end):end));
     O_K = O_K(c(1):c(end));
-    plot(O_K/N);
+    plot(K(c(1):c(end)), O_K/N);
     
+    xlabel("K")
+    ylabel("Probability")
+    legend("Expected", "Observed");
     title(strcat({"N = ", N}));
     %Define degrees of freedom as num bins - 1
     nu = length(E_K) - 1;
