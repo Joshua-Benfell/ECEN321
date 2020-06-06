@@ -6,7 +6,7 @@ t = 5;  %Arbitrary arrival time.
 K = 0:round(t*lambda*2); %possible values for number of events in time t
 cl = 0.01; %confidence level
 
-vals = [100, 500, 1000, 5000, 10000, 50000, 100000];
+vals = round(logspace(2,5,20));
 chi2Vals = zeros(length(vals));
 critVals = zeros(length(vals));
 
@@ -16,7 +16,7 @@ annotation('textbox', [0 0.9 1 0.1], ...
     'EdgeColor', 'none', ...
     'HorizontalAlignment', 'center') % Figure title
 for I = 1:length(vals)
-    subplot(2, 4, I)
+    subplot(4, 5, I)
     hold on
     N = vals(I); %Number of experiments
     Y = -log(rand(M,N))/lambda; %Inter Arrival Times; exponential random variable
@@ -40,7 +40,7 @@ for I = 1:length(vals)
     O_K(c(1)) = sum(O_K(1:c(1)));
     O_K(c(end)) = sum(O_K(c(end):end));
     O_K = O_K(c(1):c(end));
-    plot(K(c(1):c(end)), O_K/N);
+    bar(K(c(1):c(end)), O_K/N);
     
     xlabel("K")
     ylabel("Probability")
