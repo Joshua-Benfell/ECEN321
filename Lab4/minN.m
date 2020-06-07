@@ -6,18 +6,19 @@ t = 5;  %Arbitrary arrival time.
 K = 0:round(t*lambda*2); %possible values for number of events in time t
 cl = 0.01; %confidence level
 
-vals = 50:1:99;
-chi2Vals = zeros(length(vals));
-critVals = zeros(length(vals));
+%vals = round(logspace(2,5,20));
+vals = 49:1:1000;
+chi2Vals = zeros(1, length(vals));
+critVals = zeros(1, length(vals));
 
-figure(1)
-annotation('textbox', [0 0.9 1 0.1], ...
-    'String', "Expected and Observed Outcomes for Varying number of samples, N, scaled by N", ...
-    'EdgeColor', 'none', ...
-    'HorizontalAlignment', 'center') % Figure title
+%figure(1)
+%annotation('textbox', [0 0.9 1 0.1], ...
+%    'String', "Expected and Observed Outcomes for Varying number of samples, N, scaled by N", ...
+%    'EdgeColor', 'none', ...
+%    'HorizontalAlignment', 'center') % Figure title
 for I = 1:length(vals)
-    subplot(10, 10, I)
-    hold on
+%    subplot(4, 5, I)
+%    hold on
     N = vals(I); %Number of experiments
     Y = -log(rand(M,N))/lambda; %Inter Arrival Times; exponential random variable
     arrivalTimes = cumsum(Y);
@@ -34,18 +35,18 @@ for I = 1:length(vals)
     E_K(c(1)) = sum(E_K(1:c(1)));
     E_K(c(end)) = sum(E_K(c(end):end));
     E_K = E_K(c(1):c(end));
-    plot(K(c(1):c(end)), E_K/N);
+%    plot(K(c(1):c(end)), E_K/N);
     %Observed K
     %no find in this one to keep dimensions consistent
     O_K(c(1)) = sum(O_K(1:c(1)));
     O_K(c(end)) = sum(O_K(c(end):end));
     O_K = O_K(c(1):c(end));
-    bar(K(c(1):c(end)), O_K/N);
+%    bar(K(c(1):c(end)), O_K/N);
     
-    xlabel("K")
-    ylabel("Probability")
-    legend("Expected", "Observed");
-    title(strcat({"N = ", N}));
+%    xlabel("K")
+%    ylabel("Probability")
+%    legend("Expected", "Observed");
+%    title(strcat({"N = ", N}));
     %Define degrees of freedom as num bins - 1
     nu = length(E_K) - 1;
 
